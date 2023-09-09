@@ -1,0 +1,28 @@
+pipeline {
+   agent any
+
+      stage 'init' {
+          stage {
+              git '-\=;,/'
+          }      
+      }
+      stage 'plan' {
+          stage {
+              sh 'terraform plan'
+          }
+      }
+      stage 'validate' {
+          stage {
+              sh 'terraform validate'
+          }
+      }
+      stage 'action' {
+          stage {
+              sh 'terraform $action --auto-approve'
+          }
+
+      }
+   
+   }
+
+}
